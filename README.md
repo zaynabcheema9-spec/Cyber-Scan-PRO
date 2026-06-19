@@ -1,13 +1,35 @@
-# CyberScan Pro 🔍
+# 🛡 CyberScan Pro
 
-A lightweight cybersecurity scanning tool with web dashboard.
+A lightweight cybersecurity scanning tool with a Flask-based web dashboard for IP/domain scanning and basic vulnerability enrichment.
 
-## Features
-- IP/Domain scanning
-- Port detection
-- Vulnerability enrichment
-- Web dashboard UI (Flask)
+---
 
-## Run
+## 🚀 Features
+- IP / Domain scanning
+- Open port detection
+- Service identification
+- Scan history storage (SQLite)
+- Web dashboard (Flask UI)
+- Offline-ready structure
+
+---
+
+## 🧠 Tech Stack
+- Python
+- Flask
+- SQLite
+- HTML / CSS (Jinja templates)
+
+---
+
+## 📸 Screenshots
+(Add your UI screenshots here)
+
+---
+
+## ⚙️ Installation
+
 ```bash
-python web/server.py
+git clone https://github.com/YOUR_USERNAME/CyberScan-Pro.git
+cd CyberScan-Pro
+pip install -r requirements.txt
