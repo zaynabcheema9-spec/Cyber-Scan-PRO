@@ -1,3 +1,6 @@
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Flask](https://img.shields.io/badge/Flask-WebApp-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 # 🛡 CyberScan Pro
 
 A lightweight cybersecurity scanning tool with a Flask-based web dashboard for IP/domain scanning and basic vulnerability enrichment.
