@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan Results</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        .host {
+            background: #1e293b;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .high { color: red; }
+        .medium { color: orange; }
+        .low { color: lightgreen; }
+
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #334155;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #334155;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📊 Scan Results: {{ target }}</h1>
+
+{% for host in results %}
+<div class="host">
+
+    <h2>Host: {{ host.host }}</h2>
+    <p>Status: {{ host.state }}</p>
+
+    <h3>
+        Risk Score:
+        {% if host.risk_score > 70 %}
+            <span class="high">{{ host.risk_score }} (HIGH)</span>
+        {% elif host.risk_score > 40 %}
+            <span class="medium">{{ host.risk_score }} (MEDIUM)</span>
+        {% else %}
+            <span class="low">{{ host.risk_score }} (LOW)</span>
+        {% endif %}
+    </h3>
+
+    {% for protocol in host.protocols %}
+        <h4>{{ protocol.protocol }}</h4>
+
+        <table>
+            <tr>
+                <th>Port</th>
+                <th>Service</th>
+                <th>Product</th>
+                <th>Risk</th>
+                <th>CVEs</th>
+            </tr>
+
+            {% for port in protocol.ports %}
+            <tr>
+                <td>{{ port.port }}</td>
+                <td>{{ port.service }}</td>
+                <td>{{ port.product }}</td>
+                <td>{{ port.risk_score }}</td>
+                <td>
+                    {% for cve in port.cves %}
+                        {{ cve.id }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% endfor %}
+
+</div>
+{% endfor %}
+
+</body>
+</html>

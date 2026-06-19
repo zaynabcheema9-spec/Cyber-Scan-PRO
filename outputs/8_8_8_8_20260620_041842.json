@@ -1,0 +1,38 @@
+{
+    "target": "8.8.8.8",
+    "scan_time": "2026-06-20T04:18:42.437375",
+    "results": [
+        {
+            "host": "8.8.8.8",
+            "state": "up",
+            "protocols": [
+                {
+                    "protocol": "tcp",
+                    "ports": [
+                        {
+                            "port": 53,
+                            "state": "open",
+                            "service": "tcpwrapped",
+                            "product": "",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": [],
+                            "risk_score": 0
+                        },
+                        {
+                            "port": 443,
+                            "state": "open",
+                            "service": "https",
+                            "product": "",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": [],
+                            "risk_score": 0
+                        }
+                    ]
+                }
+            ],
+            "risk_score": 0.0
+        }
+    ]
+}

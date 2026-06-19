@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CyberScan Pro Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #22c55e;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #334155;
+        }
+
+        th {
+            background: #1e293b;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 20px;
+            background: #334155;
+            margin: 20px auto;
+        }
+
+        .progress {
+            height: 20px;
+            width: 0%;
+            background: #22c55e;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🛡 CyberScan Pro Dashboard</h1>
+
+<input id="target" placeholder="Enter IP or Domain">
+<button onclick="startScan()">Start Scan</button>
+
+<div class="progress-bar">
+    <div class="progress" id="progress"></div>
+</div>
+
+<h3 id="status">Waiting...</h3>
+
+<h2>📊 Scan History</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Target</th>
+            <th>IP</th>
+            <th>Ports</th>
+            <th>Risk</th>
+            <th>Time</th>
+            <th>Report</th>
+        </tr>
+    </thead>
+    <tbody id="history"></tbody>
+</table>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+<script>
+const socket = io();
+
+// LIVE SCAN
+function startScan() {
+    fetch("/scan", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            target: document.getElementById("target").value,
+            ip: "45.33.32.156",
+            open_ports: [22,80],
+            vulnerabilities: ["CVE-1234"],
+            risk_score: 70
+        })
+    }).then(() => loadHistory());
+}
+
+// LIVE PROGRESS
+socket.on("scan_update", function(data) {
+    document.getElementById("progress").style.width = data.progress + "%";
+    document.getElementById("status").innerText = data.status;
+});
+
+socket.on("scan_complete", function(data) {
+    document.getElementById("status").innerText = data.message;
+    loadHistory();
+});
+
+// LOAD HISTORY
+function loadHistory() {
+    fetch("/history")
+    .then(res => res.json())
+    .then(data => {
+        let rows = "";
+        data.forEach(scan => {
+            rows += `
+                <tr>
+                    <td>${scan.id}</td>
+                    <td>${scan.target}</td>
+                    <td>${scan.ip}</td>
+                    <td>${scan.open_ports}</td>
+                    <td>${scan.risk_score}</td>
+                    <td>${scan.timestamp}</td>
+                    <td><a href="/report/${scan.id}" style="color:#22c55e">PDF</a></td>
+                </tr>
+            `;
+        });
+
+        document.getElementById("history").innerHTML = rows;
+    });
+}
+
+// initial load
+loadHistory();
+</script>
+
+</body>
+</html>

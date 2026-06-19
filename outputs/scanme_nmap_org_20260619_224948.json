@@ -1,0 +1,71 @@
+{
+    "target": "scanme.nmap.org",
+    "scan_time": "2026-06-19T22:49:48.761620",
+    "results": [
+        {
+            "host": "45.33.32.156",
+            "state": "up",
+            "protocols": [
+                {
+                    "protocol": "tcp",
+                    "ports": [
+                        {
+                            "port": 22,
+                            "state": "open",
+                            "service": "tcpwrapped",
+                            "product": "",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": []
+                        },
+                        {
+                            "port": 25,
+                            "state": "filtered",
+                            "service": "smtp",
+                            "product": "",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": []
+                        },
+                        {
+                            "port": 80,
+                            "state": "open",
+                            "service": "http",
+                            "product": "Apache httpd",
+                            "version": "2.4.7",
+                            "extrainfo": "(Ubuntu)",
+                            "cves": []
+                        },
+                        {
+                            "port": 2525,
+                            "state": "filtered",
+                            "service": "ms-v-worlds",
+                            "product": "",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": []
+                        },
+                        {
+                            "port": 9929,
+                            "state": "open",
+                            "service": "nping-echo",
+                            "product": "Nping echo",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": []
+                        },
+                        {
+                            "port": 31337,
+                            "state": "open",
+                            "service": "tcpwrapped",
+                            "product": "",
+                            "version": "",
+                            "extrainfo": "",
+                            "cves": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
